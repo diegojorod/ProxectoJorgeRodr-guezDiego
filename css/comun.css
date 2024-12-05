@@ -44,7 +44,7 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: var(--clr-gray);
+    background-color: var(--clr-main);
     margin: 0;
 }
 
@@ -100,21 +100,40 @@ input[type="submit"], input[type="button"] {
     transition: background-color 0.3s;
 }
 
-input[type="submit"] {
-    background-color: var(--clr-main);
+/* Estilo base compartido por ambos botones */
+#submit, #limpiar {
+    width: 100%; 
+    background-color: var(--clr-green);
+    color: var(--clr-white);
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 1rem;
+    text-align: center;
 }
 
-input[type="submit"]:hover {
+/* Botón "Entrar a CarbaShop" */
+#submit {
     background-color: var(--clr-main-light);
 }
 
-input[type="button"] {
-    background-color: var(--clr-red);
+#submit:hover {
+    background-color: var(--clr-green); /* Cambia a verde oscuro al pasar el mouse */
 }
 
-input[type="button"]:hover {
-    background-color: #b22b2b;
+/* Botón "Limpiar Datos" */
+#limpiar {
+    background-color: var(--clr-green);
 }
+
+#limpiar:hover {
+    background-color: var(--clr-main-light); /* Cambia a verde claro al pasar el mouse */
+}
+
 
 .error-message {
     font-size: 0.85rem;
