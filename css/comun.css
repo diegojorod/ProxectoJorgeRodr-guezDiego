@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap');
 
 :root {
-    /*Variables de colores*/
+    /*Colores*/
     --clr-main: #45880e;
     --clr-main-light: #73ff00;
     --clr-white: #fff7e5;
@@ -38,4 +38,86 @@ a {
 .texto-footer{
     color: var(--clr-main-light);
     font-size: .85rem;
+}
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: var(--clr-gray);
+    margin: 0;
+}
+
+.container {
+    width: 90%;
+    max-width: 400px;
+    background-color: var(--clr-white);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+h2 {
+    color: var(--clr-main);
+    margin-bottom: 1.5rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 1px solid var(--clr-gray);
+    border-radius: 5px;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus, input[type="password"]:focus {
+    outline: none;
+    border-color: var(--clr-main-light);
+}
+
+#botones {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
+
+input[type="submit"], input[type="button"] {
+    flex: 1;
+    padding: 0.75rem;
+    font-size: 1rem;
+    color: var(--clr-white);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+input[type="submit"] {
+    background-color: var(--clr-main);
+}
+
+input[type="submit"]:hover {
+    background-color: var(--clr-main-light);
+}
+
+input[type="button"] {
+    background-color: var(--clr-red);
+}
+
+input[type="button"]:hover {
+    background-color: #b22b2b;
+}
+
+.error-message {
+    font-size: 0.85rem;
+    color: var(--clr-red);
+    display: none; 
 }
