@@ -1,0 +1,165 @@
+/* Estilos base */
+.contenedor {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100vh;
+    background-color: var(--clr-white);
+}
+
+.header-mobile {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: var(--clr-main);
+    color: var(--clr-white);
+    font-size: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.open-menu, .close-menu {
+    background: none;
+    border: none;
+    color: var(--clr-white);
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+main {
+    flex: 1;
+    padding: 1.5rem;
+    background-color: var(--clr-gray);
+}
+
+.titulo-principal {
+    font-size: 1.8rem;
+    color: var(--clr-main);
+    margin-bottom: 1rem;
+}
+/* Estilos para los productos */
+.producto {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--clr-white);
+    border: 1px solid var(--clr-gray);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+    width: 100%;
+    max-width: 300px; /* Limitar el tamaño máximo del contenedor */
+    margin: auto;
+}
+
+.producto:hover {
+    transform: scale(1.03);
+}
+
+.producto-imagen {
+    width: 100%;
+    height: 200px; /* Ajustar la altura para que no sea tan grande */
+    object-fit: cover;
+    border-bottom: 1px solid var(--clr-gray);
+}
+
+.producto-detalles {
+    padding: 1rem;
+    text-align: center;
+}
+
+.producto-titulo {
+    font-size: 1.2rem;
+    color: var(--clr-main);
+}
+
+.producto-precio {
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
+}
+
+.producto-agregar {
+    margin-top: 1rem;
+    background-color: var(--clr-main);
+    color: var(--clr-white);
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-size: 1rem;
+    border-radius: 5px;
+}
+
+.producto-agregar:hover {
+    background-color: var(--clr-dark);
+}
+
+/* Ajustar la grid para productos */
+.contenedor-productos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Ajustar tamaño de columnas */
+    gap: 1rem;
+    justify-content: center;
+}
+
+/* Estilos del menú lateral */
+.aside-visible {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 250px;
+    background-color: var(--clr-dark);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    padding: 1rem;
+}
+
+.menu {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.boton-menu {
+    display: flex;
+    align-items: center;
+    background: none;
+    border: none;
+    color: var(--clr-white);
+    font-size: 1.2rem;
+    margin: 1rem 0;
+    cursor: pointer;
+}
+
+.boton-menu i {
+    margin-right: 0.5rem;
+}
+
+.boton-menu.active {
+    color: var(--clr-main);
+}
+
+footer {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
+    color: var(--clr-white);
+}
+
+.texto-footer {
+    font-size: 0.8rem;
+}
+
+/* Variables de colores */
+:root {
+    --clr-main: #3498db;
+    --clr-dark: #2c3e50;
+    --clr-white: #ecf0f1;
+    --clr-gray: #bdc3c7;
+}

@@ -136,7 +136,9 @@ input[type="submit"], input[type="button"] {
 
 
 .error-message {
-    font-size: 0.85rem;
     color: var(--clr-red);
-    display: none; 
+    font-size: 0.85rem;
+    margin-top: 5px;
+    display: block; /* Asegura que se renderiza */
 }
+
