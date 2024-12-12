@@ -7,14 +7,26 @@ document.addEventListener("DOMContentLoaded", () => {
     const closeMenu = document.getElementById('close-menu');
     const aside = document.querySelector('.aside-visible');
 
-    // Datos de ejemplo de productos
+    // Datos actualizados de productos
     const productos = [
-        { id: "portatil-01", titulo: "Portatil 01", imagen: "./img/portatiles/01.jpg", categoria: "portatiles", precio: 1250 },
-        { id: "portatil-02", titulo: "Portatil 02", imagen: "./img/portatiles/02.jpg", categoria: "portatiles", precio: 1100 },
         { id: "movil-01", titulo: "Movil 01", imagen: "./img/moviles/01.jpg", categoria: "moviles", precio: 850 },
         { id: "movil-02", titulo: "Movil 02", imagen: "./img/moviles/02.jpg", categoria: "moviles", precio: 909 },
-        { id: "television-01", titulo: "Televisiones 01", imagen: "./img/televisiones/01.jpg", categoria: "televisiones", precio: 500 },
-        { id: "television-02", titulo: "Televisiones 02", imagen: "./img/televisiones/02.jpg", categoria: "televisiones", precio: 1000 }
+        { id: "movil-03", titulo: "Movil 03", imagen: "./img/moviles/03.jpg", categoria: "moviles", precio: 1249 },
+        { id: "movil-04", titulo: "Movil 04", imagen: "./img/moviles/04.jpg", categoria: "moviles", precio: 349 },
+        { id: "movil-05", titulo: "Movil 05", imagen: "./img/moviles/05.jpg", categoria: "moviles", precio: 450 },
+        { id: "portatil-01", titulo: "Portatil 01", imagen: "./img/portatiles/01.jpg", categoria: "portatiles", precio: 1250 },
+        { id: "portatil-02", titulo: "Portatil 02", imagen: "./img/portatiles/02.jpg", categoria: "portatiles", precio: 1100 },
+        { id: "portatil-03", titulo: "Portatil 03", imagen: "./img/portatiles/03.jpg", categoria: "portatiles", precio: 650 },
+        { id: "portatil-04", titulo: "Portatil 04", imagen: "./img/portatiles/04.jpg", categoria: "portatiles", precio: 450 },
+        { id: "portatil-05", titulo: "Portatil 05", imagen: "./img/portatiles/05.jpg", categoria: "portatiles", precio: 909 },
+        { id: "portatil-06", titulo: "Portatil 06", imagen: "./img/portatiles/06.jpg", categoria: "portatiles", precio: 899 },
+        { id: "portatil-07", titulo: "Portatil 07", imagen: "./img/portatiles/07.jpg", categoria: "portatiles", precio: 700 },
+        { id: "portatil-08", titulo: "Portatil 08", imagen: "./img/portatiles/08.jpg", categoria: "portatiles", precio: 400 },
+        { id: "television-01", titulo: "Television 01", imagen: "./img/televisiones/01.jpg", categoria: "televisiones", precio: 500 },
+        { id: "television-02", titulo: "Television 02", imagen: "./img/televisiones/02.jpg", categoria: "televisiones", precio: 1000 },
+        { id: "television-03", titulo: "Television 03", imagen: "./img/televisiones/03.jpg", categoria: "televisiones", precio: 700 },
+        { id: "television-04", titulo: "Television 04", imagen: "./img/televisiones/04.jpg", categoria: "televisiones", precio: 550 },
+        { id: "television-05", titulo: "Television 05", imagen: "./img/televisiones/05.jpg", categoria: "televisiones", precio: 1200 }
     ];
 
     let carrito = [];
@@ -77,6 +89,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     closeMenu.addEventListener('click', () => {
-        aside.style.transform = 'translateX(-100%)';
+        aside.style.transform = 'translateX(100%)';
     });
 });
