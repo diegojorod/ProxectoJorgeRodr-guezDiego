@@ -7,7 +7,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const limpiarBtn = document.getElementById("limpiar");
 
     formulario.addEventListener("submit", (event) => {
-        // Quitamos event.preventDefault() para permitir que el formulario se procese normalmente
+        event.preventDefault(); // Evitar que el formulario se envíe mientras validamos
+
         let isValid = true;
 
         // Validación del campo "nombre"
@@ -23,8 +24,6 @@ document.addEventListener("DOMContentLoaded", () => {
             errorNombre.textContent = "El nombre no puede tener más de 20 caracteres.";
             errorNombre.style.color = "var(--clr-red)";
             isValid = false;
-        } else {
-            errorNombre.textContent = ""; // Limpia el mensaje de error si es válido
         }
 
         // Validación del campo "password"
@@ -38,8 +37,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 "La contraseña debe tener entre 8 y 16 caracteres y solo puede contener letras, números y ·$%&/().";
             errorPassword.style.color = "var(--clr-red)";
             isValid = false;
-        } else {
-            errorPassword.textContent = ""; // Limpia el mensaje de error si es válido
         }
 
         // Si todo es válido, redirige a la página main.html
