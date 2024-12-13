@@ -43,18 +43,18 @@ main {
     margin-bottom: 1rem;
 }
 
-/* Estilos para los productos */
+
 .producto {
     display: flex;
     flex-direction: column;
     background-color: var(--clr-main);
-    border: 0.0625rem solid var(--clr-white); /* 1px -> 0.0625rem */
-    border-radius: 0.5rem; /* 8px -> 0.5rem */
+    border: 0.0625rem solid var(--clr-white); 
+    border-radius: 1rem; 
     overflow: hidden;
     box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease;
     width: 100%;
-    max-width: 18.75rem; /* 300px -> 18.75rem */
+    max-width: 18.75rem; 
     margin: auto;
 }
 
@@ -66,7 +66,7 @@ main {
     width: 100%;
     height: 12.5rem; /* 200px -> 12.5rem */
     object-fit: cover;
-    border-bottom: 0.0625rem solid var(--clr-gray); /* 1px -> 0.0625rem */
+    border-bottom: 0.0625rem solid var(--clr-gray); 
 }
 
 .producto-detalles {
@@ -125,20 +125,20 @@ main {
 /* Numerito al lado del carrito */
 #numerito {
     position: absolute;
-    top: -0.3125rem; /* 5px -> 0.3125rem */
-    right: -0.3125rem; /* 5px -> 0.3125rem */
+    top: -0.3125rem; 
+    right: -0.3125rem; 
     background-color: var(--clr-red);
     color: var(--clr-white);
     font-size: 0.9rem;
     font-weight: bold;
     border-radius: 50%;
-    width: 1.25rem; /* 20px -> 1.25rem */
+    width: 1.25rem; 
     height: 1.25rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 0.125rem 0.3125rem rgba(0, 0, 0, 0.2); /* 2px -> 0.125rem, 5px -> 0.3125rem */
-    z-index: 1; /* Asegurarse de que el numerito esté por encima del icono */
+    box-shadow: 0 0.125rem 0.3125rem rgba(0, 0, 0, 0.2); 
+    
 }
 
 
@@ -147,7 +147,7 @@ main {
     position: fixed;
     top: 0;
     right: 0;
-    width: 18.75rem; /* 300px -> 18.75rem */
+    width: 18.75rem; 
     height: 100%;
     background-color: var(--clr-main);
     color: var(--clr-main-light);
@@ -186,7 +186,7 @@ main {
 
 footer {
     position: absolute;
-    bottom: 1.25rem; /* 20px -> 1.25rem */
+    bottom: 1.25rem; 
     width: 100%;
     text-align: center;
     color: var(--clr-main-light);

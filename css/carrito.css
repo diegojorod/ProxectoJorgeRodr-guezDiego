@@ -1,0 +1,142 @@
+/* Estilos para el carrito */
+.contenedor-carrito {
+    padding: 1rem;
+    background-color: var(--clr-white);
+    border-radius: 0.5rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+    margin: auto;
+    max-width: 1200px;
+}
+
+/* Contenedor de productos */
+.carrito-productos {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Producto dentro del carrito */
+.carrito-producto {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    border: 0.0625rem solid var(--clr-gray);
+    border-radius: 0.5rem;
+    background-color: var(--clr-white);
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.05);
+}
+
+/* Imagen del producto */
+.carrito-producto-imagen {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 0.5rem;
+}
+
+/* Información del producto */
+.carrito-producto-titulo, 
+.carrito-producto-cantidad, 
+.carrito-producto-precio, 
+.carrito-producto-subtotal {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1;
+}
+
+/* Título del producto */
+.carrito-producto-titulo h3 {
+    margin: 0;
+    font-size: 1rem;
+    color: var(--clr-main);
+}
+
+/* Botón de eliminar */
+.carrito-producto-eliminar {
+    background: none;
+    border: none;
+    color: var(--clr-red);
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+/* Contenedor de acciones del carrito */
+.carrito-acciones {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    padding: 1rem;
+    border-top: 0.0625rem solid var(--clr-gray);
+}
+
+/* Botón de vaciar carrito */
+.carrito-acciones-vaciar {
+    background-color: var(--clr-red);
+    color: var(--clr-white);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+/* Contenedor para el total */
+.carrito-acciones-total {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Botón de comprar */
+.carrito-acciones-comprar {
+    background-color: var(--clr-green);
+    color: var(--clr-white);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+/* Mensajes de estado */
+.carrito-vacio,
+.carrito-comprado {
+    text-align: center;
+    font-size: 1.2rem;
+    color: var(--clr-main);
+    display: none;
+}
+
+/* Estilos adicionales para la vista del carrito */
+.carrito-producto {
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+/* Subtotal y precio */
+.carrito-producto-subtotal,
+.carrito-producto-precio {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+/* Ajustes para el botón eliminar */
+.carrito-producto-eliminar:hover {
+    color: var(--clr-dark-red);
+}
+
+/* Ajustes para el botón comprar */
+.carrito-producto-comprar:hover {
+    background-color: var(--clr-dark-green);
+}
+
+/* Estilo para el numerito que muestra la cantidad de productos en el carrito */
+.numerito {
+    background-color: var(--clr-red);
+    color: var(--clr-white);
+    padding: 0.25rem 0.5rem;
+    border-radius: 50%;
+    font-size: 0.9rem;
+    margin-left: 0.5rem;
+}
