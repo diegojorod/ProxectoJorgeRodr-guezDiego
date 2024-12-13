@@ -1,102 +1,96 @@
-// carrito.js
-
-// Función para obtener los productos desde el almacenamiento local (localStorage)
 function cargarCarrito() {
-    // Obtener los productos del localStorage
-    let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-
-    // Obtener el contenedor del carrito
+    const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
     const contenedorCarrito = document.getElementById('carrito-productos');
     const mensajeVacio = document.getElementById('carrito-vacio');
     const mensajeComprado = document.getElementById('carrito-comprado');
     const totalElement = document.getElementById('Total');
-    
-    // Si el carrito está vacío, mostrar mensaje de vacío
+
     if (carrito.length === 0) {
         mensajeVacio.style.display = 'block';
         mensajeComprado.style.display = 'none';
-        contenedorCarrito.innerHTML = ''; // Limpiar el contenido del carrito
+        contenedorCarrito.innerHTML = '';
     } else {
         mensajeVacio.style.display = 'none';
         mensajeComprado.style.display = 'none';
 
         let total = 0;
-        contenedorCarrito.innerHTML = ''; // Limpiar el contenido antes de añadir los productos
+        contenedorCarrito.innerHTML = ''; // Limpiar el carrito
 
-        // Recorrer los productos y añadirlos al carrito
-        carrito.forEach(producto => {
-            total += producto.precio * producto.cantidad;
+        carrito.forEach((producto) => {
+            const { id, nombre, imagen, precio, cantidad } = producto;
+            total += precio * cantidad;
+
             const productoHTML = `
                 <div class="carrito-producto">
-                    <img src="${producto.imagen}" alt="${producto.nombre}" class="carrito-producto-imagen">
+                    <img src="${imagen}" alt="${nombre}" class="carrito-producto-imagen">
                     <div class="carrito-producto-titulo">
-                        <h3>${producto.nombre}</h3>
+                        <h3>${nombre}</h3>
                     </div>
                     <div class="carrito-producto-cantidad">
-                        <p>Cantidad: ${producto.cantidad}</p>
+                        <p>Cantidad: ${cantidad}</p>
                     </div>
                     <div class="carrito-producto-precio">
-                        <p>Precio: $${producto.precio.toFixed(2)}</p>
+                        <p>Precio: $${precio.toFixed(2)}</p>
                     </div>
                     <div class="carrito-producto-subtotal">
-                        <p>Subtotal: $${(producto.precio * producto.cantidad).toFixed(2)}</p>
+                        <p>Subtotal: $${(precio * cantidad).toFixed(2)}</p>
                     </div>
-                    <button class="carrito-producto-eliminar" data-id="${producto.id}">Eliminar</button>
+                    <button class="carrito-producto-eliminar" data-id="${id}">Eliminar</button>
                 </div>
             `;
             contenedorCarrito.innerHTML += productoHTML;
         });
 
-        // Mostrar el precio total
         totalElement.textContent = `$${total.toFixed(2)}`;
     }
 }
+function agregarAlCarrito(producto) {
+    let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
 
-// Función para manejar la eliminación de un producto
+    // Verificar si el producto ya está en el carrito
+    const productoExistente = carrito.find(item => item.id === producto.id);
+
+    if (productoExistente) {
+        // Si ya existe, incrementar la cantidad
+        productoExistente.cantidad += producto.cantidad;
+    } else {
+        // Si no existe, agregarlo al carrito
+        carrito.push(producto);
+    }
+
+    // Guardar el carrito actualizado en el localStorage
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+}
+
 function eliminarProducto(id) {
     let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-    carrito = carrito.filter(producto => producto.id !== id); // Filtrar el producto a eliminar
+    carrito = carrito.filter((producto) => producto.id !== id);
 
-    // Actualizar el carrito en localStorage
     localStorage.setItem('carrito', JSON.stringify(carrito));
-
-    // Recargar el carrito
     cargarCarrito();
 }
 
-// Función para vaciar el carrito
 function vaciarCarrito() {
-    localStorage.removeItem('carrito'); // Eliminar el carrito del localStorage
-    cargarCarrito(); // Recargar el carrito
+    localStorage.removeItem('carrito');
+    cargarCarrito();
 }
 
-// Función para manejar el evento de compra
 function comprarAhora() {
     alert('Compra realizada con éxito');
-    localStorage.removeItem('carrito'); // Limpiar el carrito después de la compra
-    cargarCarrito(); // Recargar el carrito
+    localStorage.removeItem('carrito');
+    cargarCarrito();
 }
 
-// Agregar los eventos de los botones
 document.addEventListener('DOMContentLoaded', () => {
-    // Cargar los productos en el carrito al cargar la página
     cargarCarrito();
 
-    // Añadir eventos de eliminación a los botones de eliminar
     document.getElementById('carrito-productos').addEventListener('click', (e) => {
         if (e.target.classList.contains('carrito-producto-eliminar')) {
-            const idProducto = parseInt(e.target.dataset.id);
+            const idProducto = parseInt(e.target.dataset.id, 10);
             eliminarProducto(idProducto);
         }
     });
 
-    // Añadir evento para vaciar el carrito
-    document.querySelector('.carrito-acciones-vaciar').addEventListener('click', () => {
-        vaciarCarrito();
-    });
-
-    // Añadir evento para realizar la compra
-    document.querySelector('.carrito-acciones-comprar').addEventListener('click', () => {
-        comprarAhora();
-    });
+    document.querySelector('.carrito-acciones-vaciar').addEventListener('click', vaciarCarrito);
+    document.querySelector('.carrito-acciones-comprar').addEventListener('click', comprarAhora);
 });
