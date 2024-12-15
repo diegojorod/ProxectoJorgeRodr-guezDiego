@@ -1,96 +1,123 @@
-function cargarCarrito() {
-    const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-    const contenedorCarrito = document.getElementById('carrito-productos');
-    const mensajeVacio = document.getElementById('carrito-vacio');
-    const mensajeComprado = document.getElementById('carrito-comprado');
-    const totalElement = document.getElementById('Total');
 
-    if (carrito.length === 0) {
-        mensajeVacio.style.display = 'block';
-        mensajeComprado.style.display = 'none';
-        contenedorCarrito.innerHTML = '';
-    } else {
-        mensajeVacio.style.display = 'none';
-        mensajeComprado.style.display = 'none';
+document.addEventListener("DOMContentLoaded", () => {
+    let carrito = JSON.parse(localStorage.getItem("carrito")) || []; // Recuperar carrito de localStorage
+    const contenedorProductosCarrito = document.getElementById("carrito-productos");
+    const mensajeCarritoVacio = document.getElementById("carrito-vacio");
+    const totalCarrito = document.getElementById("Total");
+    const vaciarCarritoBtn = document.querySelector(".carrito-acciones-vaciar");
+    const comprarAhoraBtn = document.querySelector(".carrito-acciones-comprar");
+    const contadorCarrito = document.getElementById("numerito");
+    const mensajeCompraRealizada = document.getElementById("carrito-comprado");
+
+    // Mostrar productos en el carrito
+    const actualizarCarrito = () => {
+        contenedorProductosCarrito.innerHTML = "";
+        mensajeCarritoVacio.style.display = carrito.length === 0 ? "block" : "none";
+        mensajeCompraRealizada.style.display = "none"; // Ocultar mensaje de compra realizada
 
         let total = 0;
-        contenedorCarrito.innerHTML = ''; // Limpiar el carrito
+        carrito.forEach(({ id, titulo, precio, cantidad, imagen }) => {
+            const subtotal = precio * cantidad;
+            total += subtotal;
 
-        carrito.forEach((producto) => {
-            const { id, nombre, imagen, precio, cantidad } = producto;
-            total += precio * cantidad;
-
-            const productoHTML = `
-                <div class="carrito-producto">
-                    <img src="${imagen}" alt="${nombre}" class="carrito-producto-imagen">
-                    <div class="carrito-producto-titulo">
-                        <h3>${nombre}</h3>
-                    </div>
-                    <div class="carrito-producto-cantidad">
-                        <p>Cantidad: ${cantidad}</p>
-                    </div>
-                    <div class="carrito-producto-precio">
-                        <p>Precio: $${precio.toFixed(2)}</p>
-                    </div>
-                    <div class="carrito-producto-subtotal">
-                        <p>Subtotal: $${(precio * cantidad).toFixed(2)}</p>
-                    </div>
-                    <button class="carrito-producto-eliminar" data-id="${id}">Eliminar</button>
+            const productoHTML = document.createElement("div");
+            productoHTML.classList.add("carrito-producto");
+            productoHTML.innerHTML = `
+                <img class="carrito-producto-imagen" src="${imagen}" alt="${titulo}">
+                <div class="carrito-producto-titulo">
+                    <small>Título</small>
+                    <h3>${titulo}</h3>
                 </div>
+                <div class="carrito-producto-cantidad">
+                    <small>Cantidad</small>
+                    <p>${cantidad}</p>
+                </div>
+                <div class="carrito-producto-precio">
+                    <small>Precio</small>
+                    <p>$${precio}</p>
+                </div>
+                <div class="carrito-producto-subtotal">
+                    <small>Subtotal</small>
+                    <p>$${subtotal}</p>
+                </div>
+                <button class="carrito-producto-eliminar" data-id="${id}"><i class="bi bi-trash-fill"></i></button>
             `;
-            contenedorCarrito.innerHTML += productoHTML;
+            contenedorProductosCarrito.appendChild(productoHTML);
         });
 
-        totalElement.textContent = `$${total.toFixed(2)}`;
-    }
-}
-function agregarAlCarrito(producto) {
-    let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+        totalCarrito.textContent = `$${total}`;
+        contadorCarrito.textContent = carrito.reduce((total, item) => total + item.cantidad, 0);
+        configurarBotonesEliminar();
+    };
 
-    // Verificar si el producto ya está en el carrito
-    const productoExistente = carrito.find(item => item.id === producto.id);
+    // Configurar botones "Eliminar"
+    const configurarBotonesEliminar = () => {
+        const botonesEliminar = document.querySelectorAll(".carrito-producto-eliminar");
+        botonesEliminar.forEach((boton) => {
+            boton.addEventListener("click", () => {
+                const idProducto = boton.dataset.id;
+                eliminarProducto(idProducto);
+            });
+        });
+    };
 
-    if (productoExistente) {
-        // Si ya existe, incrementar la cantidad
-        productoExistente.cantidad += producto.cantidad;
-    } else {
-        // Si no existe, agregarlo al carrito
-        carrito.push(producto);
-    }
+    // Eliminar un producto del carrito
+    const eliminarProducto = (idProducto) => {
+        carrito = carrito.filter((producto) => producto.id !== idProducto);
+        guardarCarrito();
+        actualizarCarrito();
+    };
 
-    // Guardar el carrito actualizado en el localStorage
-    localStorage.setItem('carrito', JSON.stringify(carrito));
-}
+    // Vaciar carrito
+    vaciarCarritoBtn.addEventListener("click", () => {
+        carrito = [];
+        guardarCarrito();
+        actualizarCarrito();
+    });
 
-function eliminarProducto(id) {
-    let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-    carrito = carrito.filter((producto) => producto.id !== id);
+    // Comprar ahora
+    comprarAhoraBtn.addEventListener("click", () => {
+        const total = carrito.reduce((acum, item) => acum + item.cantidad * item.precio, 0);
+        if (carrito.length > 0) {
+            alert(`¿Estás seguro que quieres comprar por un total de $${total}?`);
+            carrito = []; // Vaciar carrito
+            guardarCarrito();
+            actualizarCarrito();
 
-    localStorage.setItem('carrito', JSON.stringify(carrito));
-    cargarCarrito();
-}
-
-function vaciarCarrito() {
-    localStorage.removeItem('carrito');
-    cargarCarrito();
-}
-
-function comprarAhora() {
-    alert('Compra realizada con éxito');
-    localStorage.removeItem('carrito');
-    cargarCarrito();
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    cargarCarrito();
-
-    document.getElementById('carrito-productos').addEventListener('click', (e) => {
-        if (e.target.classList.contains('carrito-producto-eliminar')) {
-            const idProducto = parseInt(e.target.dataset.id, 10);
-            eliminarProducto(idProducto);
+            // Mostrar mensaje de compra realizada
+            mensajeCompraRealizada.style.display = "block";
+        } else {
+            alert("Tu carrito está vacío.");
         }
     });
 
-    document.querySelector('.carrito-acciones-vaciar').addEventListener('click', vaciarCarrito);
-    document.querySelector('.carrito-acciones-comprar').addEventListener('click', comprarAhora);
+    // Guardar carrito en localStorage
+    const guardarCarrito = () => {
+        localStorage.setItem("carrito", JSON.stringify(carrito));
+    };
+
+    // Función para añadir producto al carrito
+    const agregarAlCarrito = (producto) => {
+        const productoExistente = carrito.find((item) => item.id === producto.id);
+        if (productoExistente) {
+            productoExistente.cantidad += producto.cantidad;
+        } else {
+            carrito.push(producto);
+        }
+        guardarCarrito();
+        actualizarCarrito();
+    };
+
+    // Para agregar un producto de ejemplo (puedes eliminar esto y llamarlo desde otro lugar)
+    const productoEjemplo = {
+        id: "1",
+        titulo: "Producto Ejemplo",
+        precio: 25,
+        cantidad: 1,
+        imagen: "https://via.placeholder.com/150"
+    };
+    agregarAlCarrito(productoEjemplo); // Llamar a esta función para agregar un producto al carrito.
+
+    // Inicializar carrito
+    actualizarCarrito();
 });
