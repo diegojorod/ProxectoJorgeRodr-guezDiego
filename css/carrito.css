@@ -131,6 +131,17 @@
     background-color: var(--clr-dark-green);
 }
 
+@media (max-width: 850px) {
+    .contenedor-carrito {
+        padding: 0.5rem;
+    }
+    .carrito-producto {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+
 /* Estilo para el numerito que muestra la cantidad de productos en el carrito */
 .numerito {
     background-color: var(--clr-red);
